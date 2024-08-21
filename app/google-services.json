@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "461402842200",
+    "project_id": "blucore-3fc48",
+    "storage_bucket": "blucore-3fc48.appspot.com",
+	"firebase_url": "https://blucore-3fc48-default-rtdb.asia-southeast1.firebasedatabase.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461402842200:android:3a7a4dd7fc4139164a162d",
+        "android_client_info": {
+          "package_name": "com.example.blucore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB1Xe6At85DLpfuJRll8KmHDHUBU-Tun8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
