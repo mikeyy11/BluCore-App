@@ -1,16 +1,17 @@
 package com.example.blucore;
 
+import java.util.List;
 
 public class HelperClass {
 
-    String name, email, username, password;
+    String userType, email, username, password, jobs;
 
-    public String getName() {
-        return name;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getEmail() {
@@ -37,11 +38,20 @@ public class HelperClass {
         this.password = password;
     }
 
-    public HelperClass(String name, String email, String username, String password) {
-        this.name = name;
+    public String getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(String jobs) {
+        this.jobs = jobs;
+    }
+
+    public HelperClass(String userType, String email, String username, String password, List jobs) {
+        this.userType = userType;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.jobs = jobs.toString();
     }
 
     public HelperClass() {

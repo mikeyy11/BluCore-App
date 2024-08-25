@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.util.Log;
+import static android.content.ContentValues.TAG;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -98,13 +100,20 @@ public class LoginActivity extends AppCompatActivity {
                     if (passwordFromDB.equals(userPassword)) {
                         loginUsername.setError(null);
 
-                        String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
+                        //String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
                         String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
+                        String userType = snapshot.child(userUsername).child("userType").getValue(String.class);
 
                         Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);     //MainActivity
 
-                        intent.putExtra("name", nameFromDB);
+                        if(Objects.equals(userType, "Worker")) {
+                            Log.d(TAG, "userType1 = " + userType);
+                        } else {
+                            Log.d(TAG, "userType2 = " + userType);
+                        }
+
+                        //intent.putExtra("name", nameFromDB);
                         intent.putExtra("email", emailFromDB);
                         intent.putExtra("username", usernameFromDB);
                         intent.putExtra("password", passwordFromDB);
