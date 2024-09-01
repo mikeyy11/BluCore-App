@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
                         String userType = snapshot.child(userUsername).child("userType").getValue(String.class);
 
-                        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);     //MainActivity
+                        Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);     //MainActivity
 
                         if(Objects.equals(userType, "Worker")) {
                             Log.d(TAG, "userType1 = " + userType);

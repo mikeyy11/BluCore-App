@@ -90,7 +90,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
-                android:entries="@array/profession_list"
+                android:entries="@array/user_type"
                 android:spinnerMode="dropdown"
                 android:background="@drawable/custom_edittext"
                 app:layout_constraintBottom_toTopOf="@+id/txtPassword_RP"

@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">BluCore</string>
-    <string-array name="profession_list">
+    <string-array name="user_type">
+        <item>Select User Type</item>
         <item>Worker</item>
         <item>User</item>
+    </string-array>
+    <string-array name="profession_list">
+        <item>Select a servie</item>
+        <item>Plumber</item>
+        <item>Electrician</item>
+        <item>Carpenter</item>
     </string-array>
 </resources>

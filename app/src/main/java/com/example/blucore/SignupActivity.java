@@ -22,7 +22,7 @@ import java.util.List;
 
 public class SignupActivity extends AppCompatActivity {
 
-    EditText signupUsername, signupEmail, signupPassword, userType;
+    EditText signupUsername, signupEmail, signupPassword;
     CheckBox plumber,electrician,carpenter;
     TextView loginRedirectText;
     Button signupButton;
