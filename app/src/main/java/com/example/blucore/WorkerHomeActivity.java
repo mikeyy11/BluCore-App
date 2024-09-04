@@ -24,9 +24,9 @@ public class WorkerHomeActivity extends AppCompatActivity implements BottomNavig
                 .setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.person);
     }
-    FirstFragment firstFragment = new FirstFragment();
-    SecondFragment secondFragment = new SecondFragment();
-    ThirdFragment thirdFragment = new ThirdFragment();
+    PersonFragment personFragment = new PersonFragment();
+    HomeFragment homeFragment = new HomeFragment();
+    SettingFragment settingFragment = new SettingFragment();
 
     @Override
     public boolean
@@ -38,19 +38,19 @@ public class WorkerHomeActivity extends AppCompatActivity implements BottomNavig
         if (itemId == R.id.person) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.flFragment, firstFragment)
+                    .replace(R.id.flFragment, personFragment)
                     .commit();
             return true;
         } else if (itemId == R.id.home) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.flFragment, secondFragment)
+                    .replace(R.id.flFragment, settingFragment)
                     .commit();
             return true;
         } else if (itemId == R.id.settings) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.flFragment, thirdFragment)
+                    .replace(R.id.flFragment, settingFragment)
                     .commit();
             return true;
         }
