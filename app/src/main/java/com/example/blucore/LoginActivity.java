@@ -105,20 +105,23 @@ public class LoginActivity extends AppCompatActivity {
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
                         String userType = snapshot.child(userUsername).child("userType").getValue(String.class);
 
-                        Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);     //MainActivity
 
                         if(Objects.equals(userType, "Worker")) {
                             Log.d(TAG, "userType1 = " + userType);
+                            Intent intent = new Intent(LoginActivity.this, WorkerHomeActivity.class);
+                            intent.putExtra("email", emailFromDB);
+                            intent.putExtra("username", usernameFromDB);
+                            intent.putExtra("password", passwordFromDB);
+                            startActivity(intent);
                         } else {
                             Log.d(TAG, "userType2 = " + userType);
+                            Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
+                            intent.putExtra("email", emailFromDB);
+                            intent.putExtra("username", usernameFromDB);
+                            intent.putExtra("password", passwordFromDB);
+                            startActivity(intent);
                         }
 
-                        //intent.putExtra("name", nameFromDB);
-                        intent.putExtra("email", emailFromDB);
-                        intent.putExtra("username", usernameFromDB);
-                        intent.putExtra("password", passwordFromDB);
-
-                        startActivity(intent);
                     } else {
                         loginPassword.setError("Invalid Credentials");
                         loginPassword.requestFocus();
