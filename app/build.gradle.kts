@@ -42,4 +42,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.google.android.material:material:1.9.0")  // For TabLayout
+    implementation("com.android.support:recyclerview-v7:24.2.1")
+    //implementation("androidx.viewpager2:viewpager2:1.0.0")       // For ViewPager2
 }

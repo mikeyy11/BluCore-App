@@ -44,7 +44,7 @@ public class WorkerHomeActivity extends AppCompatActivity implements BottomNavig
         } else if (itemId == R.id.home) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.flFragment, settingFragment)
+                    .replace(R.id.flFragment, homeFragment)         // homeFragment
                     .commit();
             return true;
         } else if (itemId == R.id.settings) {
