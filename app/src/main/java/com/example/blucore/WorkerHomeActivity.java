@@ -26,7 +26,7 @@ public class WorkerHomeActivity extends AppCompatActivity implements BottomNavig
     }
     PersonFragment personFragment = new PersonFragment();
     HomeFragment homeFragment = new HomeFragment();
-    SettingFragment settingFragment = new SettingFragment();
+    EditProfileFragment editProfileFragment = new EditProfileFragment();
 
     @Override
     public boolean
@@ -44,13 +44,13 @@ public class WorkerHomeActivity extends AppCompatActivity implements BottomNavig
         } else if (itemId == R.id.home) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.flFragment, homeFragment)         // homeFragment
+                    .replace(R.id.flFragment, homeFragment)
                     .commit();
             return true;
         } else if (itemId == R.id.settings) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.flFragment, settingFragment)
+                    .replace(R.id.flFragment, editProfileFragment)
                     .commit();
             return true;
         }

@@ -58,22 +58,8 @@ public class PersonFragment extends Fragment
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View v) {
-                // Toast.makeText(getApplicationContext(), "CardView clicked!", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(PersonFragment.this, ViewServiceFragment.class);
-                //startActivity(intent);
-
-//                Fragment viewServiceFragment = new ViewServiceFragment();
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.layout.fragment_person, viewServiceFragment);
-//                transaction.addToBackStack(null);
-//                transaction.commit();
-
-                Fragment fragmentB = new ViewServiceFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                // Replace the current fragment with FragmentB
-                transaction.replace(R.layout.fragment_person, fragmentB);
-                transaction.addToBackStack(null);  // Optional: adds the transaction to the back stack
-                transaction.commit();
+                Intent intent = new Intent(getActivity(), ViewServiceActivity.class);
+                startActivity(intent);
             }
         });
 
