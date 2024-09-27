@@ -1,59 +1,32 @@
 package com.example.blucore;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
+import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-/*public class PersonFragment extends Fragment {
-
-    public PersonFragment(){
-        // require a empty public constructor
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        String[] items = {"Apple", "Banana", "Cherry", "Date", "Grapes", "Mango", "Orange", "Pineapple"};
-
-        ListView listView = findViewById(R.id.listView);
-
-        // Create an ArrayAdapter to bind the array data to the ListView
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, items);
-
-        // Set the adapter on the ListView
-        listView.setAdapter(adapter);
-
-        return inflater.inflate(R.layout.fragment_person, container, false);
-    }
-}*/
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonFragment extends Fragment
 {
-    private TextView mTextViewEmpty;
-    private ProgressBar mProgressBarLoading;
-    private ImageView mImageViewEmpty;
-    private RecyclerView mRecyclerView;
-    //private ListAdapter mListadapter;
-
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Bookings");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_person, container, false);
-
-        LinearLayout cardView = view.findViewById(R.id.list);
+        /*LinearLayout cardView = view.findViewById(R.id.list);
         cardView.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
             @Override
@@ -61,89 +34,41 @@ public class PersonFragment extends Fragment
                 Intent intent = new Intent(getActivity(), ViewServiceActivity.class);
                 startActivity(intent);
             }
+        });*/
+
+        List<Booking> bookingList = new ArrayList<>();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                bookingList.clear();
+                for (DataSnapshot bookingSnapshot : snapshot.getChildren()) {
+                    Booking booking = bookingSnapshot.getValue(Booking.class);
+                    String bookingId = bookingSnapshot.getKey();
+                    Log.d("Booking....1", "Booking ID: " + bookingId);
+                    if (booking != null) {
+                        bookingList.add(booking);
+                        //bookingDetails.append("Name: ").append(booking.getName()).append("\n");
+                        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+                        BookingAdapter adapter = new BookingAdapter(bookingList);
+                        recyclerView.setAdapter(adapter);
+                    }
+                }
+
+                for (Booking booking : bookingList) {
+                    Log.d("Booking....0", "ID: " + booking.getId() + ", User: " + booking.getDescription() +
+                            ", Date: " + booking.getName() + ", Time: " + booking.getAddress());
+                }
+                // retrieveTV.setText(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Fail to get data.", "value" + " => ");
+                // Toast.makeText(MainActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
+            }
         });
-
-        /*mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        mTextViewEmpty = (TextView)view.findViewById(R.id.textViewEmpty);
-        mImageViewEmpty = (ImageView)view.findViewById(R.id.imageViewEmpty);
-        mProgressBarLoading = (ProgressBar)view.findViewById(R.id.progressBarLoading);
-
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
-
-        ArrayList data = new ArrayList<DataNote>();
-        for (int i = 0; i < DataNoteImformation.id.length; i++)
-        {
-            data.add(
-                    new DataNote
-                            (
-                                    DataNoteImformation.id[i],
-                                    DataNoteImformation.textArray[i],
-                                    DataNoteImformation.dateArray[i]
-                            ));
-        }
-
-        mListadapter = new ListAdapter(data);
-        mRecyclerView.setAdapter(mListadapter);*/
-
         return view;
     }
-
-    /*public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>
-    {
-        private ArrayList<DataNote> dataList;
-
-        public ListAdapter(ArrayList<DataNote> data)
-        {
-            this.dataList = data;
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder
-        {
-            TextView textViewText;
-            TextView textViewComment;
-            TextView textViewDate;
-
-            public ViewHolder(View itemView)
-            {
-                super(itemView);
-                this.textViewText = (TextView) itemView.findViewById(R.id.text);
-                this.textViewComment = (TextView) itemView.findViewById(R.id.comment);
-                this.textViewDate = (TextView) itemView.findViewById(R.id.date);
-            }
-        }
-
-        @Override
-        public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-        {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, parent, false);
-
-            ViewHolder viewHolder = new ViewHolder(view);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ListAdapter.ViewHolder holder, final int position)
-        {
-            holder.textViewText.setText(dataList.get(position).getText());
-            holder.textViewComment.setText(dataList.get(position).getComment());
-            holder.textViewDate.setText(dataList.get(position).getDate());
-
-            holder.itemView.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Toast.makeText(getActivity(), "Item " + position + " is clicked.", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }*/
-
-        /*@Override
-        public int getItemCount()
-        {
-            return dataList.size();
-        }
-    }*/
 }

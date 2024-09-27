@@ -5,6 +5,7 @@ import java.util.Date;
 public class BookingHelperClass {
 
     String id, serviceType, mobile, name, address, description;
+    int status;
     //Date date;
 
     public String getServiceType() {
@@ -55,6 +56,14 @@ public class BookingHelperClass {
         this.id = id;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     /*public Date getDate() {
         return date;
     }
@@ -63,13 +72,14 @@ public class BookingHelperClass {
         this.date = date;
     }*/
 
-    public BookingHelperClass(String id, String serviceType, String mobile, String name, String address, String description) {
+    public BookingHelperClass(String id, String serviceType, String mobile, String name, String address, String description, int status) {
         this.id = id;
         this.serviceType = serviceType;
         this.mobile = mobile;
         this.name = name;
         this.address = address;
         this.description = description;
+        this.status = status;
        // this.date = date;
     }
 

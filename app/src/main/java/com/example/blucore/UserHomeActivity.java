@@ -1,6 +1,5 @@
 package com.example.blucore;
 
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,12 +7,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Date;
 
 
@@ -26,7 +22,6 @@ public class UserHomeActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     //Date date;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +33,6 @@ public class UserHomeActivity extends AppCompatActivity {
         description = findViewById(R.id.description);
         //date = findViewById(R.id.date);
         submitButton = findViewById(R.id.submit_button);
-
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +51,7 @@ public class UserHomeActivity extends AppCompatActivity {
         String Mobile = mobile.getText().toString().trim();
         String Address = address.getText().toString().trim();
         String Description = description.getText().toString().trim();
+        int Status = 1;
 
         /*if (name.isEmpty() || date.isEmpty() || time.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
@@ -64,7 +59,7 @@ public class UserHomeActivity extends AppCompatActivity {
         }*/
 
         String bookingId = databaseReference.push().getKey();
-        BookingHelperClass bookingHelperClass = new BookingHelperClass(bookingId, ServiceType, Name, Mobile, Address, Description);
+        BookingHelperClass bookingHelperClass = new BookingHelperClass(bookingId, ServiceType, Name, Mobile, Address, Description, Status);
 
         if (bookingId != null) {
             databaseReference.child(bookingId).setValue(bookingHelperClass).addOnCompleteListener(task -> {

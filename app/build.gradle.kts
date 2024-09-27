@@ -38,11 +38,19 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.firebase.database)
+    //implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.google.android.material:material:1.9.0")  // For TabLayout
     implementation("com.android.support:recyclerview-v7:24.2.1")
+    //implementation("com.google.firebase:firebase-firestore:11.4.2")
+
+    implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
+    // Firebase dependencies (no version needed when using BOM)
+    implementation("com.google.firebase:firebase-firestore")
+    //implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-database")
     //implementation("androidx.viewpager2:viewpager2:1.0.0")       // For ViewPager2
 }
+apply(plugin = "com.google.gms.google-services")
