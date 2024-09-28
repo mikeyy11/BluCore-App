@@ -38,14 +38,14 @@ tools:ignore="MissingConstraints">
         android:background="@android:color/darker_gray" />
 
     <!-- Date and Time Row -->
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="8dp"
         android:weightSum="2">
 
-        <!-- Date -->
+        &lt;!&ndash; Date &ndash;&gt;
         <TextView
             android:id="@+id/booking_date_label"
             android:layout_width="0dp"
@@ -64,7 +64,7 @@ tools:ignore="MissingConstraints">
             android:textColor="@android:color/holo_blue_light"
             android:textSize="16sp" />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -17,9 +17,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class EditProfileFragment extends Fragment {
 
-    EditText editName, editEmail, editUsername, editPassword;
+    EditText editEmail, editUsername, editPassword;
     Button saveButton, logoutButton;
-    String nameUser, emailUser, usernameUser, passwordUser;
+    String emailUser, usernameUser, passwordUser;
     DatabaseReference reference;
     SessionManager session;
     Context context = getContext();
@@ -30,7 +30,7 @@ public class EditProfileFragment extends Fragment {
         session = new SessionManager(requireContext());
         reference = FirebaseDatabase.getInstance().getReference("users");
 
-        editName = view.findViewById(R.id.editName);
+        //editName = view.findViewById(R.id.editName);
         editEmail = view.findViewById(R.id.editEmail);
         editUsername = view.findViewById(R.id.editUsername);
         editPassword = view.findViewById(R.id.editPassword);
@@ -42,9 +42,9 @@ public class EditProfileFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isNameChanged() || isPasswordChanged() || isEmailChanged()){
+                if (isPasswordChanged() || isEmailChanged()){
                     // Toast.makeText(EditProfileFragment.this, "Saved", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
                 } else {
                     // Toast.makeText(EditProfileFragment.this, "No Changes Found", Toast.LENGTH_SHORT).show();
                     Toast.makeText(getActivity(), "No Changes Found", Toast.LENGTH_SHORT).show();
@@ -90,7 +90,7 @@ public class EditProfileFragment extends Fragment {
         });
     }*/
 
-    private boolean isNameChanged() {
+    /*private boolean isNameChanged() {
         if (!nameUser.equals(editName.getText().toString())){
             reference.child(usernameUser).child("name").setValue(editName.getText().toString());
             nameUser = editName.getText().toString();
@@ -98,7 +98,7 @@ public class EditProfileFragment extends Fragment {
         } else {
             return false;
         }
-    }
+    }*/
 
     private boolean isEmailChanged() {
         if (!emailUser.equals(editEmail.getText().toString())){
@@ -125,12 +125,12 @@ public class EditProfileFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         if (intent != null) {
             // String data = intent.getStringExtra("key");  // Replace "key" with the actual key used to pass data
-            nameUser = intent.getStringExtra("name");
+            //nameUser = intent.getStringExtra("name");
             emailUser = intent.getStringExtra("email");
             usernameUser = intent.getStringExtra("username");
             passwordUser = intent.getStringExtra("password");
 
-            editName.setText(nameUser);
+            //editName.setText(nameUser);
             editEmail.setText(emailUser);
             editUsername.setText(usernameUser);
             editPassword.setText(passwordUser);

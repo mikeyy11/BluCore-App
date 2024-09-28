@@ -1,5 +1,6 @@
 package com.example.blucore;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,8 @@ public class UserHomeFragment extends Fragment {
     Button submitButton;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
+    SessionManager session;
+    private Context context = getContext();;
     //Date date;
 
     @Override
@@ -36,6 +39,7 @@ public class UserHomeFragment extends Fragment {
         serviceType = view.findViewById(R.id.service_type);
         //date = findViewById(R.id.date);
         submitButton = view.findViewById(R.id.submit_button);
+        session = new SessionManager(requireContext());
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +67,7 @@ public class UserHomeFragment extends Fragment {
         }*/
 
         String bookingId = databaseReference.push().getKey();
-        BookingHelperClass bookingHelperClass = new BookingHelperClass(bookingId, ServiceType, Name, Mobile, Address, Description, Status);
+        BookingHelperClass bookingHelperClass = new BookingHelperClass(bookingId, ServiceType, Mobile, Name, Address, Description, Status);
 
         if (bookingId != null) {
             databaseReference.child(bookingId).setValue(bookingHelperClass).addOnCompleteListener(task -> {

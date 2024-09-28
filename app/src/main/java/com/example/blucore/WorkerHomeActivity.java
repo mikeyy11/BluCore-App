@@ -33,6 +33,7 @@ public class WorkerHomeActivity extends AppCompatActivity implements BottomNavig
     PersonFragment personFragment = new PersonFragment();
     UserHomeFragment homeFragment = new UserHomeFragment();     // HomeFragment
     EditProfileFragment editProfileFragment = new EditProfileFragment();
+    SkillsFragment skillsFragment = new SkillsFragment();
 
     @Override
     public boolean
@@ -56,7 +57,7 @@ public class WorkerHomeActivity extends AppCompatActivity implements BottomNavig
         } else if (itemId == R.id.home) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.flFragment, homeFragment)
+                    .replace(R.id.flFragment, Objects.equals(session.getUserType(), "User") ? homeFragment : skillsFragment)
                     .commit();
             return true;
         } else if (itemId == R.id.settings) {

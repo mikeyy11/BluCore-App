@@ -12,6 +12,7 @@ public class SessionManager {
     private static final String PREF_NAME = "UserSession";
     private static final String IS_LOGGED_IN = "isLoggedIn";
     public static final String KEY_USERNAME = "username";
+    public static final String KEY_USERID = "userId";
     public static final String KEY_USER_TYPE = "userType";
 
     public SessionManager(Context context) {
@@ -21,9 +22,10 @@ public class SessionManager {
     }
 
     // Save user login session
-    public void createLoginSession(String username, String userType) {
+    public void createLoginSession(String username, String userType, String id) {
         editor.putBoolean(IS_LOGGED_IN, true);
         editor.putString(KEY_USERNAME, username);
+        editor.putString(KEY_USERID, id);
         editor.putString(KEY_USER_TYPE, userType);
         editor.commit();
     }
@@ -36,6 +38,10 @@ public class SessionManager {
     // Get stored session data
     public String getUsername() {
         return prefs.getString(KEY_USERNAME, null);
+    }
+
+    public String getUserId() {
+        return prefs.getString(KEY_USERID, null);
     }
 
     public String getUserType() {

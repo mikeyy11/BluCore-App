@@ -106,8 +106,9 @@ public class LoginActivity extends AppCompatActivity {
                         String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
                         String userType = snapshot.child(userUsername).child("userType").getValue(String.class);
+                        String userId = snapshot.child(userUsername).getKey();
 
-                        session.createLoginSession(usernameFromDB, userType);
+                        session.createLoginSession(usernameFromDB, userType, userId);
 
                         Intent intent = new Intent(LoginActivity.this, WorkerHomeActivity.class);
                         intent.putExtra("email", emailFromDB);
