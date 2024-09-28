@@ -26,11 +26,13 @@ public class LoginActivity extends AppCompatActivity {
     EditText loginUsername, loginPassword;
     Button loginButton;
     TextView signupRedirectText;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        session = new SessionManager(getApplicationContext());
 
         loginUsername = findViewById(R.id.login_username);
         loginPassword = findViewById(R.id.login_password);
@@ -105,8 +107,15 @@ public class LoginActivity extends AppCompatActivity {
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
                         String userType = snapshot.child(userUsername).child("userType").getValue(String.class);
 
+                        session.createLoginSession(usernameFromDB, userType);
 
-                        if(Objects.equals(userType, "Worker")) {
+                        Intent intent = new Intent(LoginActivity.this, WorkerHomeActivity.class);
+                        intent.putExtra("email", emailFromDB);
+                        intent.putExtra("username", usernameFromDB);
+                        intent.putExtra("password", passwordFromDB);
+                        startActivity(intent);
+
+                        /*if(Objects.equals(userType, "Worker")) {
                             Log.d(TAG, "userType1 = " + userType);
                             Intent intent = new Intent(LoginActivity.this, WorkerHomeActivity.class);
                             intent.putExtra("email", emailFromDB);
@@ -115,12 +124,12 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else {
                             Log.d(TAG, "userType2 = " + userType);
-                            Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, UserHomeFragment.class);
                             intent.putExtra("email", emailFromDB);
                             intent.putExtra("username", usernameFromDB);
                             intent.putExtra("password", passwordFromDB);
                             startActivity(intent);
-                        }
+                        }*/
 
                     } else {
                         loginPassword.setError("Invalid Credentials");

@@ -1,21 +1,24 @@
 package com.example.blucore;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import java.util.Date;
 
 
-public class UserHomeActivity extends AppCompatActivity {
+public class UserHomeFragment extends Fragment {
 
     EditText name, mobile, address, description;
+    Spinner serviceType;
     TextView loginRedirectText;
     Button submitButton;
     FirebaseDatabase database;
@@ -23,16 +26,16 @@ public class UserHomeActivity extends AppCompatActivity {
     //Date date;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_home);
-
-        name = findViewById(R.id.name);
-        mobile = findViewById(R.id.mobile_no);
-        address = findViewById(R.id.address);
-        description = findViewById(R.id.description);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.activity_user_home, container, false);
+        name = view.findViewById(R.id.name);
+        mobile = view.findViewById(R.id.mobile_no);
+        address = view.findViewById(R.id.address);
+        description = view.findViewById(R.id.description);
+        serviceType = view.findViewById(R.id.service_type);
         //date = findViewById(R.id.date);
-        submitButton = findViewById(R.id.submit_button);
+        submitButton = view.findViewById(R.id.submit_button);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,10 +43,11 @@ public class UserHomeActivity extends AppCompatActivity {
                 submitBooking();
             }
         });
+        return view;
     }
 
     private void submitBooking() {
-        Spinner serviceType = (Spinner) findViewById(R.id.service_type);
+        //Spinner serviceType = (Spinner) view.findViewById(R.id.service_type);
         databaseReference = FirebaseDatabase.getInstance().getReference("Bookings");
 
         String ServiceType = serviceType.getSelectedItem().toString();
@@ -64,14 +68,14 @@ public class UserHomeActivity extends AppCompatActivity {
         if (bookingId != null) {
             databaseReference.child(bookingId).setValue(bookingHelperClass).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(UserHomeActivity.this, "Booking submitted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Booking submitted", Toast.LENGTH_SHORT).show();
                     //serviceType.setText("");
                     name.setText("");
                     mobile.setText("");
                     address.setText("");
                     description.setText("");
                 } else {
-                    Toast.makeText(UserHomeActivity.this, "Failed to submit booking", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Failed to submit booking", Toast.LENGTH_SHORT).show();
                 }
             });
         }

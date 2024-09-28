@@ -2,6 +2,7 @@ package com.example.blucore;
 
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,14 +18,16 @@ import com.google.firebase.database.FirebaseDatabase;
 public class EditProfileFragment extends Fragment {
 
     EditText editName, editEmail, editUsername, editPassword;
-    Button saveButton;
+    Button saveButton, logoutButton;
     String nameUser, emailUser, usernameUser, passwordUser;
     DatabaseReference reference;
+    SessionManager session;
+    Context context = getContext();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_edit_profile, container, false);
-
+        session = new SessionManager(requireContext());
         reference = FirebaseDatabase.getInstance().getReference("users");
 
         editName = view.findViewById(R.id.editName);
@@ -32,6 +35,7 @@ public class EditProfileFragment extends Fragment {
         editUsername = view.findViewById(R.id.editUsername);
         editPassword = view.findViewById(R.id.editPassword);
         saveButton = view.findViewById(R.id.saveButton);
+        logoutButton = view.findViewById(R.id.logoutButton);
 
         showData();
 
@@ -48,6 +52,14 @@ public class EditProfileFragment extends Fragment {
             }
         });
 
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                session.logoutUser();
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         return  view;
     }
 
@@ -110,7 +122,6 @@ public class EditProfileFragment extends Fragment {
     }
 
     public void showData(){
-
         Intent intent = getActivity().getIntent();
         if (intent != null) {
             // String data = intent.getStringExtra("key");  // Replace "key" with the actual key used to pass data

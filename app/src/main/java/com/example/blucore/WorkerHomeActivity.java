@@ -3,19 +3,25 @@ package com.example.blucore;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Objects;
 
 public class WorkerHomeActivity extends AppCompatActivity implements BottomNavigationView
         .OnNavigationItemSelectedListener {
 
     BottomNavigationView bottomNavigationView;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker_home);
+        session = new SessionManager(getApplicationContext());
 
         bottomNavigationView
                 = findViewById(R.id.bottomNavigationView);
@@ -25,13 +31,19 @@ public class WorkerHomeActivity extends AppCompatActivity implements BottomNavig
         bottomNavigationView.setSelectedItemId(R.id.person);
     }
     PersonFragment personFragment = new PersonFragment();
-    HomeFragment homeFragment = new HomeFragment();
+    UserHomeFragment homeFragment = new UserHomeFragment();     // HomeFragment
     EditProfileFragment editProfileFragment = new EditProfileFragment();
 
     @Override
     public boolean
     onNavigationItemSelected(@NonNull MenuItem item)
     {
+
+        if (Objects.equals(session.getUserType(), "User")) {
+            //Toast.makeText(WorkerHomeActivity.this, "submit booking 1 " + session.getUserType(), Toast.LENGTH_SHORT).show();
+        } else {
+            //Toast.makeText(WorkerHomeActivity.this, "submit booking 2 " + session.getUserType(), Toast.LENGTH_SHORT).show();
+        }
 
         int itemId = item.getItemId();
 

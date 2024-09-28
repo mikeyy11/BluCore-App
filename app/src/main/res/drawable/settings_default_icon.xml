@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="32dp"
-    android:height="32dp"
-    android:viewportWidth="24.0"
-    android:viewportHeight="24.0"
-    android:autoMirrored="true">
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Calendar outer shape -->
     <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M10,6L8.59,7.41 13.17,12l-4.58,4.59L10,18l6,-6z"/>
+        android:fillColor="#000000"
+        android:pathData="M19,4h-1V2h-2v2H8V2H6v2H5c-1.1,0 -2,0.9 -2,2v14c0,1.1 0.9,2 2,2h14c1.1,0 2,-0.9 2,-2V6c0,-1.1 -0.9,-2 -2,-2zM19,20H5V9h14v11zM19,7H5V6h14v1z" />
+
+    <!-- First horizontal line (for the booking list) -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M7,11h10v2H7z" />
+
+    <!-- Second horizontal line (for the booking list) -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M7,15h10v2H7z" />
 </vector>
+

@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Edit Profile"
-                android:textSize="36sp"
+                android:textSize="26sp"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textColor="@color/lavender"/>
@@ -39,7 +39,7 @@
                 android:layout_height="50dp"
                 android:id="@+id/editName"
                 android:background="@drawable/custom_edittext"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:padding="8dp"
                 android:hint="Name"
                 android:drawableLeft="@drawable/ic_baseline_person_24"
@@ -90,8 +90,18 @@
                 android:text="Save"
                 android:id="@+id/saveButton"
                 android:textSize="18sp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:backgroundTint="@color/lavender"
+                app:cornerRadius = "20dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Logout"
+                android:id="@+id/logoutButton"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/grey"
                 app:cornerRadius = "20dp"/>
 
         </LinearLayout>
