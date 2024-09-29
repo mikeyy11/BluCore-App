@@ -5,6 +5,14 @@
         android:title="Bookings"
         android:icon="@drawable/settings_default_icon"/>
     <item
+        android:id="@+id/transaction"
+        android:title="Transaction"
+        android:icon="@drawable/settings_default_icon"/>
+    <item
+        android:id="@+id/chatbot"
+        android:title="ChatBot"
+        android:icon="@drawable/settings_default_icon"/>
+    <item
         android:id="@+id/home"
         android:title="Home"
         android:icon="@drawable/ic_home"/>

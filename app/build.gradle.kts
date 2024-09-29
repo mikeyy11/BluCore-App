@@ -52,5 +52,12 @@ dependencies {
     //implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
     //implementation("androidx.viewpager2:viewpager2:1.0.0")       // For ViewPager2
+
+    implementation ("org.tensorflow:tensorflow-lite:2.8.0")
+
+
+
+
+
 }
 apply(plugin = "com.google.gms.google-services")

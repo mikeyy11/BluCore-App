@@ -59,6 +59,7 @@ public class UserHomeFragment extends Fragment {
         String Mobile = mobile.getText().toString().trim();
         String Address = address.getText().toString().trim();
         String Description = description.getText().toString().trim();
+        String userId = session.getUserId();
         int Status = 1;
 
         /*if (name.isEmpty() || date.isEmpty() || time.isEmpty()) {
@@ -67,7 +68,7 @@ public class UserHomeFragment extends Fragment {
         }*/
 
         String bookingId = databaseReference.push().getKey();
-        BookingHelperClass bookingHelperClass = new BookingHelperClass(bookingId, ServiceType, Mobile, Name, Address, Description, Status);
+        BookingHelperClass bookingHelperClass = new BookingHelperClass(bookingId, ServiceType, Mobile, Name, Address, Description, Status, userId);
 
         if (bookingId != null) {
             databaseReference.child(bookingId).setValue(bookingHelperClass).addOnCompleteListener(task -> {

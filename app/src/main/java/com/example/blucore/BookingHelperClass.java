@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class BookingHelperClass {
 
-    String id, serviceType, mobile, name, address, description;
+    String id, serviceType, mobile, name, address, description, userId;
     int status;
     //Date date;
 
@@ -64,6 +64,14 @@ public class BookingHelperClass {
         this.status = status;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     /*public Date getDate() {
         return date;
     }
@@ -72,7 +80,7 @@ public class BookingHelperClass {
         this.date = date;
     }*/
 
-    public BookingHelperClass(String id, String serviceType, String mobile, String name, String address, String description, int status) {
+    public BookingHelperClass(String id, String serviceType, String mobile, String name, String address, String description, int status, String userId) {
         this.id = id;
         this.serviceType = serviceType;
         this.mobile = mobile;
@@ -80,6 +88,7 @@ public class BookingHelperClass {
         this.address = address;
         this.description = description;
         this.status = status;
+        this.userId = userId;
        // this.date = date;
     }
 

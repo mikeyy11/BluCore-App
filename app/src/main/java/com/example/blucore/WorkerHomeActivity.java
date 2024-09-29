@@ -2,6 +2,7 @@ package com.example.blucore;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -28,12 +29,32 @@ public class WorkerHomeActivity extends AppCompatActivity implements BottomNavig
 
         bottomNavigationView
                 .setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.person);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+
+        /////
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        Menu menu = bottomNavigationView.getMenu();
+
+        MenuItem transactionItem = menu.findItem(R.id.transaction);
+        if (Objects.equals(session.getUserType(), "User")) {
+            transactionItem.setVisible(true);
+        } else {
+            transactionItem.setVisible(false);
+        }
+        MenuItem bookingItem = menu.findItem(R.id.person);
+        if (!Objects.equals(session.getUserType(), "User")) {
+            bookingItem.setVisible(true);
+        } else {
+            bookingItem.setVisible(false);
+        }
+
+        ////
     }
     PersonFragment personFragment = new PersonFragment();
     UserHomeFragment homeFragment = new UserHomeFragment();     // HomeFragment
     EditProfileFragment editProfileFragment = new EditProfileFragment();
     SkillsFragment skillsFragment = new SkillsFragment();
+    TransactionFragment transactionFragment = new TransactionFragment();
 
     @Override
     public boolean
@@ -58,6 +79,12 @@ public class WorkerHomeActivity extends AppCompatActivity implements BottomNavig
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.flFragment, Objects.equals(session.getUserType(), "User") ? homeFragment : skillsFragment)
+                    .commit();
+            return true;
+        } else if (itemId == R.id.transaction) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, transactionFragment)
                     .commit();
             return true;
         } else if (itemId == R.id.settings) {
